@@ -19,6 +19,7 @@ class Sprite (pygame.sprite.Sprite) :
         self.velocity = [random.choice([-1,1]),random.choice([-1,1])]
 
     def update(self):
+        self.rect.move_ip(self.velocity)
         if self.rect.left < 0 or self.rect.right >= 500:
            self.velocity[0] = -self.velocity[0]
            pygame.event.post(pygame.event.Event(sprite_color_change_event))
