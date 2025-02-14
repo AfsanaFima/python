@@ -16,12 +16,12 @@ def calculate_age():
     except ValueError:
         result_label.config(text="Invalid Input")
 
-# Create main window
+
 window = tk.Tk()
 window.title("Age Calculator")
 window.resizable(False, False)
 
-# Create labels and entry fields
+
 frame = tk.Frame(window)
 tk.Label(frame, text="Day:").grid(row=0, column=0)
 entry_day = tk.Entry(frame, width=5)
@@ -35,14 +35,14 @@ tk.Label(frame, text="Year:").grid(row=0, column=4)
 entry_year = tk.Entry(frame, width=6)
 entry_year.grid(row=0, column=5, padx=5)
 
-# Create button and result label
+
 calculate_button = tk.Button(window, text="Calculate Age", command=calculate_age)
 result_label = tk.Label(window, text="Enter your DOB", font=("Arial", 12, "bold"))
 
-# Layout
+
 frame.grid(row=0, column=0, padx=10, pady=10, columnspan=2)
 calculate_button.grid(row=1, column=0, pady=10)
 result_label.grid(row=2, column=0, pady=10)
 
-# Run the application
+
 window.mainloop()

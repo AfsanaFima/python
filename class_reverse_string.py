@@ -6,7 +6,7 @@ class StringReverser:
         words = self.text.split()
         return ' '.join(reversed(words))
 
-# Example usage
+
 sentence = "Hello World Python"
 reverser = StringReverser(sentence)
-print(reverser.reverse_words())  # Output: "Python World Hello"
+print(reverser.reverse_words())  
