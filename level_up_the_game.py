@@ -1,25 +1,33 @@
-
 import pygame
 import random
 
 
+# Initialize pygame
 pygame.init()
 
-
+# Screen dimensions
 WIDTH, HEIGHT = 800, 600
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Player vs Enemies Collision Game")
 
+# Load background image
+background_image = pygame.image.load("background.jpg")  
+background_image = pygame.transform.scale(background_image, (WIDTH, HEIGHT))
 
-WHITE = (255, 255, 255)
+
+# Load background music
+pygame.mixer.music.load("background.mp3")  # Make sure this file is in the same folder
+pygame.mixer.music.play(-1)  # Play on loop
+
+# Colors
 RED = (200, 0, 0)
 BLUE = (0, 0, 200)
 
-
+# Game variables
 score = 0
 font = pygame.font.Font(None, 36)
 
-
+# Player sprite
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
@@ -38,7 +46,7 @@ class Player(pygame.sprite.Sprite):
         if keys[pygame.K_DOWN] and self.rect.bottom < HEIGHT:
             self.rect.y += 5
 
-
+# Enemy sprite
 class Enemy(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
@@ -48,7 +56,7 @@ class Enemy(pygame.sprite.Sprite):
         self.rect.x = random.randint(0, WIDTH - 50)
         self.rect.y = random.randint(0, HEIGHT - 50)
 
-
+# Sprite groups
 player = Player()
 enemies = pygame.sprite.Group()
 
@@ -58,35 +66,36 @@ for _ in range(7):
 
 all_sprites = pygame.sprite.Group(player, *enemies)
 
-
+# Game loop
 running = True
 while running:
-    screen.fill(WHITE)
+    # Draw background image
+    screen.blit(background_image, (0, 0))
 
-   
+    # Event handling
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
 
-    
+    # Update player
     player.update()
 
-    
+    # Check for collisions
     collided_enemies = pygame.sprite.spritecollide(player, enemies, False)
-    if collided_enemies:  
+    if collided_enemies:
         score += 1
-        for enemy in collided_enemies:  
+        for enemy in collided_enemies:
             enemy.rect.x = random.randint(0, WIDTH - 50)
             enemy.rect.y = random.randint(0, HEIGHT - 50)
 
-    
+    # Draw all sprites
     all_sprites.draw(screen)
 
-    
-    score_text = font.render(f"Score: {score}", True, (0, 0, 0))
+    # Display score
+    score_text = font.render(f"Score: {score}", True, (255, 255, 255))
     screen.blit(score_text, (10, 10))
 
-    
+    # Refresh display
     pygame.display.flip()
     pygame.time.delay(30)
 

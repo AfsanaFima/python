@@ -8,9 +8,7 @@ class Bus (vehicle) :
     pass
 
 class Car(vehicle):
-    pass
 
-v1 = vehicle("fer",130,18)
 school_bus = Bus("school volvo",180,12)
 car = Car ("Audi Qs",250,20)
 

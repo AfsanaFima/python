@@ -33,4 +33,3 @@ result_label.grid(row=0, column=2, padx=10, pady=10)
 
 
 window.mainloop()
-
